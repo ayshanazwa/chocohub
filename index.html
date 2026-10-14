@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChocoHub | Chocolate Bliss</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff8ef;
+      color: #32180f;
+    }
+
+    header {
+      background: #28140f;
+      color: #fff0da;
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #e8b66b;
+    }
+
+    nav a {
+      color: #fff0da;
+      text-decoration: none;
+      margin-left: 22px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #e8b66b;
+    }
+
+    .hero {
+      min-height: 480px;
+      padding: 80px 8%;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(40,20,15,.96),
+        rgba(40,20,15,.55)),
+        url("https://images.unsplash.com/photo-1548907040-4d42c0a7b8e2?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 1.1;
+      margin: 20px 0;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #f0dfd1;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #e8b66b;
+      color: #28140f;
+      padding: 14px 25px;
+      border: none;
+      border-radius: 7px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #f5cb8a;
+    }
+
+    .products {
+      padding: 65px 8%;
+      text-align: center;
+    }
+
+    .products h2 {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: #806657;
+      margin-bottom: 35px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px #32180f12;
+      text-align: left;
+      padding-bottom: 20px;
+      transition: transform .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .card h3, .card p, .card .price {
+      margin: 13px 16px;
+    }
+
+    .card p {
+      color: #806657;
+      font-size: 14px;
+    }
+
+    .price {
+      display: block;
+      font-weight: bold;
+      color: #713d24;
+    }
+
+    .card button {
+      margin: 0 16px;
+    }
+
+    .story {
+      background: #49281b;
+      color: #fff0da;
+      text-align: center;
+      padding: 55px 8%;
+    }
+
+    .story h2 {
+      margin-bottom: 15px;
+      font-size: 30px;
+    }
+
+    .story p {
+      line-height: 1.7;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    footer {
+      background: #28140f;
+      color: #d9c3b2;
+      text-align: center;
+      padding: 22px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      header {
+        padding: 18px 5%;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+
+      .hero {
+        padding: 60px 6%;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 230px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🍫 ChocoHub</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#shop">🛍 Cart</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p>YOUR DAILY DOSE OF HAPPINESS</p>
+      <h1>Life Is Better With Chocolate.</h1>
+      <p>
+        Discover your favorite chocolates, explore exciting flavors,
+        and make every moment a little sweeter with ChocoHub.
+      </p>
+      <a href="#shop" class="btn">Explore Chocolates →</a>
+    </div>
+  </section>
+
+  <section class="products" id="shop">
+    <h2>Our Sweet Collection</h2>
+    <p class="subtitle">
+      Handpicked treats for every chocolate lover.
+    </p>
+
+    <div class="product-grid">
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80"
+             alt="Dark chocolate">
+        <h3>Dark Chocolate</h3>
+        <p>Rich, bold and delicious.</p>
+        <span class="price">₹149</span>
+        <button class="btn" onclick="addToCart('Dark Chocolate',149)">
+          Add to Cart
+        </button>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1548907040-4d42c0a7b8e2?auto=format&fit=crop&w=600&q=80"
+             alt="Milk chocolate">
+        <h3>Milk Chocolate</h3>
+        <p>Smooth and creamy happiness.</p>
+        <span class="price">₹99</span>
+        <button class="btn" onclick="addToCart('Milk Chocolate',99)">
+          Add to Cart
+        </button>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=80"
+             alt="Chocolate treats">
+        <h3>Choco Treats</h3>
+        <p>Small bites, big smiles.</p>
+        <span class="price">₹199</span>
+        <button class="btn" onclick="addToCart('Choco Treats',199)">
+          Add to Cart
+        </button>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80"
+             alt="Chocolate gift box">
+        <h3>Gift Boxes</h3>
+        <p>The sweetest way to say you care.</p>
+        <span class="price">₹299</span>
+        <button class="btn" onclick="addToCart('Gift Boxes',299)">
+          Add to Cart
+        </button>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="story" id="about">
+    <h2>Made With Love ❤️</h2>
+    <p>
+      At ChocoHub, we believe chocolate makes ordinary moments
+      extraordinary. Explore our sweet collection and share happiness
+      one delicious bite at a time.
+    </p>
+  </section>
+
+  <footer id="contact">
+    <p>Contact: hello@chocohub.example</p>
+    <p style="margin-top: 10px;">
+      © 2026 ChocoHub. All rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    let cartCount = 0;
+
+    function addToCart(product, price) {
+      cartCount++;
+      alert(
+        product + " added to your cart!\n" +
+        "Price: ₹" + price + "\n" +
+        "Items in cart: " + cartCount
+      );
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,686 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chcohub | Products</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --brown: #39251d;
+  --cream: #000000;
+  --gold: #c29468;
+  --muted: #573925;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: var(--brown);
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button, a {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Navigation */
+.navbar {
+  padding: 22px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9ded0;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.logo span {
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-size: 14px;
+}
+
+.cart {
+  background: var(--brown);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+}
+
+/* Hero */
+.hero {
+  padding: 65px 7%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.label {
+  color: #a7774f;
+  font-size: 11px;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 1.12;
+  font-weight: 500;
+  margin: 22px 0;
+}
+
+.hero h1 em {
+  color: var(--gold);
+}
+
+.hero p {
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 390px;
+}
+
+.shop-btn {
+  display: inline-block;
+  margin-top: 27px;
+  padding: 15px 26px;
+  border-radius: 30px;
+  background: var(--brown);
+  color: white;
+  transition: .3s;
+}
+
+.shop-btn:hover {
+  background: var(--gold);
+}
+
+.hero img {
+  width: 100%;
+  height: 410px;
+  object-fit: cover;
+  border-radius: 45% 45% 12px 12px;
+}
+
+/* Product section */
+.products {
+  padding: 55px 7% 85px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 15px;
+  margin-bottom: 28px;
+}
+
+.section-head h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(32px, 4vw, 46px);
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.count {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter {
+  padding: 11px 19px;
+  border-radius: 25px;
+  border: 1px solid #e3d5c5;
+  background: transparent;
+  color: var(--brown);
+}
+
+.filter.active,
+.filter:hover {
+  background: var(--brown);
+  color: white;
+}
+
+.search {
+  display: flex;
+  gap: 8px;
+}
+
+.search input,
+.search select {
+  padding: 11px 14px;
+  border: 1px solid #e3d5c5;
+  border-radius: 25px;
+  background: transparent;
+  outline: none;
+  max-width: 100%;
+}
+
+.search input {
+  width: 180px;
+}
+
+/* Product cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 25px 18px;
+  margin-top: 32px;
+}
+
+.card {
+  min-width: 0;
+}
+
+.image-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 13px;
+  background: #eee2d4;
+  aspect-ratio: 4 / 5;
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s;
+}
+
+.card:hover .image-box img {
+  transform: scale(1.06);
+}
+
+.tag {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  padding: 7px 9px;
+  background: var(--cream);
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background: var(--cream);
+  font-size: 20px;
+}
+
+.heart.liked {
+  color: #c62846;
+}
+
+.add {
+  position: absolute;
+  bottom: 12px;
+  left: 10px;
+  right: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: var(--brown);
+  color: white;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: .3s;
+}
+
+.card:hover .add,
+.add:focus {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.details {
+  padding-top: 15px;
+}
+
+.category {
+  font-size: 10px;
+  color: #a7774f;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.name-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.name-price h3 {
+  font-size: 15px;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.desc {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.empty {
+  display: none;
+  text-align: center;
+  padding: 50px 0;
+  color: var(--muted);
+}
+
+/* Bottom banner */
+.banner {
+  margin: 0 7% 65px;
+  padding: 55px 20px;
+  background: var(--brown);
+  color: var(--cream);
+  text-align: center;
+  border-radius: 20px;
+}
+
+.banner h2 {
+  font: 500 clamp(28px, 4vw, 45px) Georgia, serif;
+  margin: 18px 0;
+}
+
+.banner p {
+  color: #d9c5b2;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid #e9ded0;
+  padding: 25px 7%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero {
+    gap: 25px;
+  }
+
+  .hero img {
+    height: 330px;
+  }
+}
+
+@media (max-width: 650px) {
+  .navbar {
+    padding: 18px 5%;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 45px 5%;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .hero img {
+    height: 330px;
+  }
+
+  .products {
+    padding: 45px 5% 60px;
+  }
+
+  .toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .search select {
+    width: 145px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 12px;
+  }
+
+  .add {
+    opacity: 1;
+    transform: none;
+    font-size: 11px;
+    padding: 10px 5px;
+    bottom: 7px;
+    left: 7px;
+    right: 7px;
+  }
+
+  .name-price {
+    align-items: start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .banner {
+    margin: 0 5% 45px;
+    padding: 40px 18px;
+  }
+}
+
+@media (max-width: 350px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="#" class="logo">gain<span>.</span></a>
+
+  <nav class="nav-links">
+    <a href="#">Home</a>
+    <a href="#products">Products</a>
+    <a href="#story">Our Story</a>
+  </nav>
+
+  <button class="cart" id="cartButton">
+    Bag (<span id="cartCount">0</span>)
+  </button>
+</header>
+
+<section class="hero">
+  <div>
+    <span class="label">THE ART OF CHOCOLATE</span>
+    <h1>Life is better<br><em>with chocolate.</em></h1>
+
+    <p>
+      Little bites. Big feelings. Discover your next
+      favourite indulgence with Chcohub.
+    </p>
+
+    <a href="#products" class="shop-btn">Explore collection ↗</a>
+  </div>
+
+  <img
+    src="https://images.unsplash.com/photo-1548907040-4d42cfc4f6e6?auto=format&fit=crop&w=900&q=85"
+    alt="Chocolate collection"
+  >
+</section>
+
+<section class="products" id="products">
+  <div class="section-head">
+    <div>
+      <span class="label">FIND YOUR FAVOURITE</span>
+      <h2>The collection.</h2>
+    </div>
+    <span class="count" id="count">4 products</span>
+  </div>
+
+  <div class="toolbar">
+    <div class="filters">
+      <button class="filter active" data-filter="All">All</button>
+      <button class="filter" data-filter="Dark">Dark</button>
+      <button class="filter" data-filter="Milk">Milk</button>
+      <button class="filter" data-filter="Gifts">Gifts</button>
+    </div>
+
+    <div class="search">
+      <input id="searchInput" placeholder="Search products..." aria-label="Search products">
+      <select id="sortSelect" aria-label="Sort by price">
+        <option value="featured">Featured</option>
+        <option value="low">Price: Low to high</option>
+        <option value="high">Price: High to low</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid" id="productGrid"></div>
+  <div class="empty" id="empty">No products found. Try another search!</div>
+</section>
+
+<section class="banner" id="story">
+  <span class="label">A LITTLE MORE JOY</span>
+  <h2>Happiness comes wrapped in chocolate.</h2>
+  <p>Find something sweet for yourself or someone special.<br>
+     Every moment deserves a little indulgence.</p>
+  <a href="#products" class="shop-btn">Shop your favourites ↗</a>
+</section>
+
+<footer>
+  <a href="#" class="logo">chcohub<span>.</span></a>
+  <p>Made with love & a little chocolate. © 2026</p>
+</footer>
+
+<script>
+const products = [
+  {
+    id: 1,
+    name: "Midnight Cocoa",
+    category: "Dark",
+    price: 249,
+    tag: "BESTSELLER",
+    desc: "Rich, bold & irresistible",
+    image: "https://images.unsplash.com/photo-1548907040-4d42cfc4f6e6?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 2,
+    name: "Golden Truffle",
+    category: "Milk",
+    price: 329,
+    tag: "FAN FAVOURITE",
+    desc: "Smooth chocolate delight",
+    image: "https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 3,
+    name: "Cocoa Dreams",
+    category: "Dark",
+    price: 199,
+    tag: "NEW DROP",
+    desc: "Your everyday happiness",
+    image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 4,
+    name: "Sweet Moments",
+    category: "Gifts",
+    price: 499,
+    tag: "GIFT EDIT",
+    desc: "Made for someone special",
+    image: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=80"
+  }
+];
+
+let activeFilter = "All";
+let cart = [];
+let favourites = new Set();
+
+const grid = document.getElementById("productGrid");
+
+function renderProducts() {
+  const query = document.getElementById("searchInput")
+    .value.trim().toLowerCase();
+
+  let list = products.filter(p =>
+    (activeFilter === "All" || p.category === activeFilter) &&
+    (p.name.toLowerCase().includes(query) ||
+     p.category.toLowerCase().includes(query))
+  );
+
+  const sort = document.getElementById("sortSelect").value;
+
+  if (sort === "low") list.sort((a, b) => a.price - b.price);
+  if (sort === "high") list.sort((a, b) => b.price - a.price);
+
+  document.getElementById("count").textContent =
+    `${list.length} product${list.length === 1 ? "" : "s"}`;
+
+  document.getElementById("empty").style.display =
+    list.length ? "none" : "block";
+
+  grid.innerHTML = list.map(p => `
+    <article class="card">
+      <div class="image-box">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        <span class="tag">${p.tag}</span>
+
+        <button class="heart ${favourites.has(p.id) ? "liked" : ""}"
+          data-like="${p.id}" aria-label="Toggle favourite">
+          ${favourites.has(p.id) ? "♥" : "♡"}
+        </button>
+
+        <button class="add" data-add="${p.id}">+ Add to bag</button>
+      </div>
+
+      <div class="details">
+        <span class="category">${p.category} chocolate</span>
+        <div class="name-price">
+          <h3>${p.name}</h3>
+          <span class="price">₹${p.price}</span>
+        </div>
+        <p class="desc">${p.desc}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
+document.querySelectorAll(".filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    activeFilter = btn.dataset.filter;
+
+    document.querySelectorAll(".filter").forEach(b =>
+      b.classList.toggle("active", b === btn)
+    );
+
+    renderProducts();
+  });
+});
+
+document.getElementById("searchInput")
+  .addEventListener("input", renderProducts);
+
+document.getElementById("sortSelect")
+  .addEventListener("change", renderProducts);
+
+grid.addEventListener("click", event => {
+  const addButton = event.target.closest("[data-add]");
+  const likeButton = event.target.closest("[data-like]");
+
+  if (addButton) {
+    const product = products.find(
+      p => p.id === Number(addButton.dataset.add)
+    );
+
+    if (product) {
+      cart.push(product);
+      document.getElementById("cartCount").textContent = cart.length;
+      addButton.textContent = "✓ Added!";
+      setTimeout(() => {
+        if (addButton.isConnected) {
+          addButton.textContent = "+ Add to bag";
+        }
+      }, 900);
+    }
+  }
+
+  if (likeButton) {
+    const id = Number(likeButton.dataset.like);
+
+    if (favourites.has(id)) favourites.delete(id);
+    else favourites.add(id);
+
+    renderProducts();
+  }
+});
+
+document.getElementById("cartButton").addEventListener("click", () => {
+  if (!cart.length) {
+    alert("Your shopping bag is empty!");
+    return;
+  }
+
+  const total = cart.reduce((sum, p) => sum + p.price, 0);
+  const items = cart.map(p => p.name).join("\n");
+
+  alert("YOUR CHCOHUB BAG\n\n" + items +
+        "\n\nTotal: ₹" + total +
+        "\n\nDemo only: checkout is not connected.");
+});
+
+renderProducts();
+</script>
+
+</body>
+</html>
